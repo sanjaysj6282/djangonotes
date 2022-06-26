@@ -8,8 +8,11 @@ class Articles(models.Model):
     # Add in thumbnail later
     # Add in author later
 
-def __str__(self):
-    return self.title
+    def __str__(self):
+        return self.title
+
+    def snippet(self):
+        return self.body[:50]+"..."
 
 # To make migration file to track the change in models
 #  python manage.py makemigrations
