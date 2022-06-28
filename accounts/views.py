@@ -9,8 +9,8 @@ def signup_view(request):
         # it validates the form --> is the username ok etc
         if form.is_valid():
             user = form.save()
-            login(request, user)
             # log the user
+            login(request, user)
             return redirect('articles:list')
     else:
         form=UserCreationForm()
@@ -22,9 +22,10 @@ def login_view(request):
         # data is not the 1st parameter of fn by default
         form = AuthenticationForm(data=request.POST)
         if form.is_valid():
-            # log th user
+            # log the user
             user = form.get_user()
             login(request, user)
+            #  if there is next query 
             if 'next' in request.POST:
                 return redirect(request.POST.get("next"))
             else:
