@@ -1,5 +1,6 @@
 from ast import Return
 from django.shortcuts import render, redirect
+from sqlalchemy import false
 from .models import Articles
 from django.contrib.auth.decorators import login_required
 from . import forms
@@ -19,6 +20,10 @@ def article_create(request):
         form=forms.CreateArticle(request.POST, request.FILES)
         if form.is_valid():
             # save article to db
+            # commit=false to wait
+            instance= form.save(commit=False)
+            instance.author=request.user
+            instance.save()
             return redirect('articles:list')
 
     else:
