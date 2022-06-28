@@ -10,6 +10,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.homepage),
     path('articles/', include('articles.urls')),
+    path('accounts/', include('accounts.urls')),
     path('about/', views.about)
 ]
 
